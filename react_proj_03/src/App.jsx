@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Card from "./Components/card";
 import axios from 'axios';
 
@@ -10,6 +10,8 @@ const App = () => {
   const [limit, setLimit] = useState(30)
   const [serverUrl, setServerUrl] = useState(`https://picsum.photos/v2/list?page=${pageNumber}&limit=${limit}`)
   const [photos, setPhotos] = useState([])
+  const [isDisabled, setIsDisabled] = useState(true)
+
 
 
   useEffect(()=>{
@@ -37,11 +39,16 @@ const App = () => {
 
       <div className="BottomContainer flex w-screen justify-between min-h-1/12 items-center pl-3 pr-3 mb-1">
             <button className="bg-amber-400 h-full pl-7 pr-7 rounded-2xl active:scale-50"
-            onClick={()=>{
-              setPhotos([])
+            disabled = {isDisabled}
+            // disabled = {true}
+            onClick={(e)=>{
               if(pageNumber>1){
+                setPhotos([])
                 setPageNumber(pageNumber-1)
               }
+             if(pageNumber===1){
+              setIsDisabled(true)
+             }
             }}>Prev</button>
 
             <p>Page NO {pageNumber}</p>
@@ -49,6 +56,7 @@ const App = () => {
             <button
             className="bg-amber-400 h-full pl-7 pr-7 rounded-2xl active:scale-50"
             onClick={()=>{
+                setIsDisabled(false)
                 setPhotos([])
                 setPageNumber(pageNumber+1)
             }}
