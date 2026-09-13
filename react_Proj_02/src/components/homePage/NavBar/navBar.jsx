@@ -19,7 +19,7 @@ const NavBar = (props) => {
     return (
         <div className="NavBar flex justify-between fixed left-0 w-full z-50 px-4 py-3.5 bg-transparent">        
             <div className="rightContent">
-                <div className="brand font-bold text-white shadow-2xl">Jundle Book</div>
+                <div className="brand font-bold text-white shadow-2xl">Jungle Book</div>
             </div>
 
             <div className="leftContent">
